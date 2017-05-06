@@ -4,11 +4,13 @@ import requests
 import os,sys,traceback
 import sendgrid
 from sendgrid.helpers.mail import *
+from time import sleep
 
 bungo_apiKey=os.environ.get('BUNGIE_API_KEY')
 bungo_authHeader = {'X-API-Key': bungo_apiKey}
 sg_apiKey = os.environ.get('SENDGRID_API_KEY')
-emailTarget = "ninja-chemists@googlegroups.com"
+#emailTarget = "ninja-chemists@googlegroups.com"
+emailTarget = "dc@davidcampbell.org"
 emailSender = "xur@ninjachemists.com"
 emailSubject = "TGIF: Update from the Nine"
 
@@ -17,9 +19,10 @@ bungie_base_url = "https://www.bungie.net/Platform/Destiny/"
 xur_url = bungie_base_url + "Advisors/Xur/"
 hashType = "6"
 whereIsXur_url = "https://tellmewhereisxur.com/api"
+# ^^ is borked
 whereIsTrials_url = "http://api.destinytrialsreport.com/currentMap/"
 
-DEBUG = 0
+DEBUG = 1
 
 def sendMail():
     try:
@@ -75,12 +78,14 @@ def getXurInventory():
                 res = requests.get(hashReqString, headers=bungo_authHeader)
                 item_name = res.json()['Response']['data']['inventoryItem']['itemName']
                 #print "Item is: " + item_name
-                item_type = res.json()['Response']['data']['inventoryItem']['itemTypeName']
-                item_tier = res.json()['Response']['data']['inventoryItem']['tierTypeName']
+                #item_type = res.json()['Response']['data']['inventoryItem']['itemTypeName']
+                #item_tier = res.json()['Response']['data']['inventoryItem']['tierTypeName']
                 #print "Item type is: " + item_tier + " " + item_type + "\n"
-                xurStuff = xurStuff + "\n" + item_name + ": " + item_tier + " " + item_type + "\n"
+                #xurStuff = xurStuff + "\n" + item_name + ": " + item_tier + " " + item_type + "\n"
+                xurStuff = xurStuff + "\n" + item_name + "\n"
                 #xurStuff.append(item_name + " " + item_tier + " "+ item_type)
                 #print item_name + ": " + item_tier + " " + item_type
+                sleep(0.5)
         return(xurStuff)
 
         # Print the error status:

@@ -9,8 +9,7 @@ from time import sleep
 bungo_apiKey=os.environ.get('BUNGIE_API_KEY')
 bungo_authHeader = {'X-API-Key': bungo_apiKey}
 sg_apiKey = os.environ.get('SENDGRID_API_KEY')
-#emailTarget = "ninja-chemists@googlegroups.com"
-emailTarget = "dc@davidcampbell.org"
+emailTarget = "ninja-chemists@googlegroups.com"
 emailSender = "xur@ninjachemists.com"
 emailSubject = "TGIF: Update from the Nine"
 
